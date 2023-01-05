@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>VueJS - TP 1</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="btn">
+            <input class="zoom" value="Clique ici" @click="action">
+        </div>
+        la var 'test' = {{ test }} <br>
+        <p>Compteur : <span @click="compteur++">{{ compteur }}</span></p>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    const { createApp } = Vue
+
+    createApp({
+        mounted() {
+            console.log('Ding ! 🍪 Votre code fonctionne !')
+        },
+        data() {
+            return {
+                'test': "Bonjour",
+                'compteur': 0,
+            }
+        },
+        methods: {
+            action() {
+                alert("🎉 Bravo 🎉 cpt à " + this.compteur)
+                // alert(this.test) // This.varInThisApp
+            },
+        },
+    }).mount('#app')
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
+
+    * {
+        font-family: 'Raleway', sans-serif;
+        font-weight: bold;
+    }
+
+ #app {
+        text-align: center;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 20%;
+        padding: 20px;
+        border: solid black 1px;
+    }
+
+    input {
+        border-radius: 0px;
+        border: 1px solid black;
+        padding: 10px;
+        background-color: white;
+        text-align: center;
+        margin-bottom: 10px;
+
+    }
+
+    .zoom {
+        transition-property: transform;
+        -webkit-transition-property: transform;
+        transition-duration: .5s;
+        transition-timing-function: ease-out;
+        background-color: white;
+        color: black;
+    }
+
+    .zoom:hover {
+        transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        background-color: rgb(0, 0, 0);
+        color: white;
+    }
+    span{
+        color: rgb(64, 211, 191);
+    }
+</style>
