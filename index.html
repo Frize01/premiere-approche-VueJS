@@ -12,13 +12,13 @@
 <body>
     <div id="app">
         <div class="btn">
-            <button class="zoom" @click="action">Clique ici</button>
+            <button class="zoom" @click="liste.splice(index, 1)">Supprime le premier</button> <!-- @click="action" || Affiche bravo vous savez cliquer sur un btn -->
         </div>
         la var 'test' = {{ test }}
         <p>Compteur : <span @click="compteur++">{{ compteur }}</span></p>
 
         <ul>
-            <li v-for="item in liste">{{item}}</li>
+            <li @click="liste.splice(index, 1)" v-for="(item, index) in liste">{{item}}</li>
         </ul>
         <input type="text" v-model="saisie" @keyup.enter="entreSaisie" />
     </div>
@@ -31,7 +31,7 @@
     const { createApp } = Vue
 
     createApp({
-        mounted() {
+        mounted() { // Code executé des que le site à chargé 
             console.log('Ding ! 🍪 Votre code fonctionne !')
         },
         data() {
@@ -44,7 +44,7 @@
         },
         methods: {
             action() {
-                alert("🎉 Bravo 🎉 cpt à " + this.compteur)
+                alert("🎉 Bravo vous savez cliquer sur un btn 🎉 || cpt à " + this.compteur)
                 // alert(this.test) // This.varInThisApp
             },
             entreSaisie(){
