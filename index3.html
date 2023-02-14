@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS TP2</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<body class="bg-sky-400">
+
+    
+    
+    <div id="app">
+        <div class="flex justify-center"><button class="mb-2 mt-4 p-2 rounded-md bg-cyan-500 text-white" @click="fetchData()">Recharger</button></div>
+        <div class="flex flex-row flex-wrap justify-center">
+        <div class="max-w-xl bg-sky-100 m-1 p-1 rounded-lg flex" v-for="produit in produits" :key="produit.id">
+            <div class="max-w-xs justify-content"><h1 class="font-bold text-lg">{{ produit.nom }}</h1> <p>{{produit.description}}</p> <p>Prix (€) : {{produit.prix}} € <br>Prix ($) : {{produit.prix*1.08}} $ <br>Prix (BTC) : {{produit.prix*0.000052}} BTC </p></div> <div><img  class="rounded-md h-full" :src="produit.lien_image" alt="" srcset=""></div>
+        </div>
+</div>
+    </div>
+</body>
+
+</html>
+
+<script lang="ts">
+    const { createApp } = Vue
+
+    createApp({
+
+        mounted() {
+            console.log('Application montée');
+            this.fetchData();
+            
+        },
+        methods: {
+            fetchData(){
+                fetch('http://127.0.0.1:8000/api/produit')
+                .then(response => response.json())
+                .then(data => this.produits = data);
+                
+                
+            }
+        },
+        data() {
+            return { produits: [] }
+        }
+        
+    }).mount('#app')
+</script>
